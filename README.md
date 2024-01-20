@@ -1,14 +1,14 @@
-#Task Management Application
+# Task Management Application
 
 ## Overview
 This project is a simple task manageemnt application built with Django. It allows users to add a new task, view all tasks, and mark a task as completed.
 
 ## Tech Stack
 - **Backend Framework:** Django
-- **Database:** SQLite (for development; can be replaced with other databases in production)
-- **Frontend:** HTML, CSS (possibly with Bootstrap for styling), JavaScript
+- **Database:** SQLite
+- **Frontend:** HTML, CSS, Bootstrap, JavaScript
 - **RESTful API:** Django REST Framework
-- **Version Control:** Git (Hosted on GitHub)
+- **Version Control:** Git
 
 ## Steps to deploy application:
 1. Clone the repository: `git clone https://github.com/kaiyan-ng/task-manager.git`
