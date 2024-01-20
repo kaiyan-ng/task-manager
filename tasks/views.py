@@ -5,14 +5,12 @@ from .models import Tasks
 from .serializers import TasksSerializer
 from django import forms
 from rest_framework import viewsets
-from rest_framework.decorators import action
-from rest_framework.response import Response
 
 class TasksViewSet(viewsets.ModelViewSet):
     queryset = Tasks.objects.all()
     serializer_class = TasksSerializer
 
-class AddTaskForm(forms.Form):
+"""class AddTaskForm(forms.Form):
     name = forms.CharField(
         label="Task Name",
         widget=forms.TextInput(attrs={'style': 'width: 500px;', 'autofocus': True})
@@ -20,7 +18,16 @@ class AddTaskForm(forms.Form):
     description = forms.CharField(
         label="Task Description",
         widget=forms.Textarea(attrs={'rows': 6, 'cols': 100, 'placeholder':'Add Description...'})
-    )
+    )"""
+
+class AddTaskForm(forms.ModelForm):
+    class Meta:
+        model = Tasks
+        fields = ['name', 'description']
+        widgets = {
+            'name': forms.TextInput(attrs={'style': 'width: 500px;', 'autofocus': True}),
+            'description': forms.Textarea(attrs={'rows': 6, 'cols': 100, 'placeholder': 'Add Description...'}),
+        }
 
 # Create your views here.
 def index(request):

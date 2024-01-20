@@ -5,4 +5,3 @@ class TasksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tasks
         fields = '__all__'
-        lookup_field = 'name'

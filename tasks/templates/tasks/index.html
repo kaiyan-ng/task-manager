@@ -22,8 +22,8 @@
                     <thead style="background-color: #e3f2fd;">
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col" colspan="4" style="min-width: 100px;"> Task Name </th>
-                            <th scope="col" colspan="4" style="min-width: 200px;"> Task Description</th>
+                            <th scope="col" colspan="4" style="min-width: 100px; max-width: 400px;"> Task Name </th>
+                            <th scope="col" colspan="4" style="min-width: 200px; max-width: 800px;"> Task Description</th>
                             <th scope="col"> Status </th>
                             <th scope="col" style="min-width: 100px;"> Created At </th>
                         </tr>
@@ -36,8 +36,8 @@
                                     <input id="selected-task" type="checkbox" name="mark" value="{{task.id}}"> 
                                     {% endif %}
                                 </td>
-                                <td colspan="4" style="min-width: 100px;"> {{ task.name }} </td>
-                                <td colspan="4" style="min-width: 200px;"> {{ task.description }} </td>
+                                <td colspan="4" style="min-width: 100px; max-width: 400px;"> {{ task.name }} </td>
+                                <td colspan="4" style="min-width: 200px; max-width: 800px;" class="text-break"> {{ task.description|linebreaksbr }} </td>
                                 <td class="fw-light" id="status"> 
                                     {% if task.completed %}
                                     Completed
