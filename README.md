@@ -1,7 +1,7 @@
 # Task Management Application
 
 ## Overview
-This project is a simple task manageemnt application built with Django. It allows users to add a new task, view all tasks, and mark a task as completed.
+This project is a simple task management application built with Django. It allows users to add a new task, view all tasks, and mark a task as completed.
 
 ## Tech Stack
 - **Backend Framework:** Django
