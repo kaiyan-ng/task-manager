@@ -1,0 +1,97 @@
+{% extends "tasks/layout.html" %}
+
+{% block body %}
+<h4 class="mt-5"> Tasks </h4>
+    {% if tasks %}
+    <form action="{% url 'add' %}" method="get" class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-outline-primary btn btn-sm">Add New Task</button>
+    </form>
+{% else %}
+    <form action="{% url 'add' %}" method="get" class="text-center">
+        <button type="submit" class="btn btn-outline-primary btn btn-sm">Add New Task</button>
+    </form>
+{% endif %}
+
+    {% if not tasks %}
+        <p class="text-center mt-3"> There are no tasks.</p>
+    {% else %}
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <div class="table-responsive mt-3">
+                <table class="table align-middle">
+                    <thead style="background-color: #e3f2fd;">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" colspan="4" style="min-width: 100px;"> Task Name </th>
+                            <th scope="col" colspan="4" style="min-width: 200px;"> Task Description</th>
+                            <th scope="col"> Status </th>
+                            <th scope="col" style="min-width: 100px;"> Created At </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for task in tasks %}
+                            <tr scope="row">
+                                <td>
+                                    {% if not task.completed %}
+                                    <input id="selected-task" type="checkbox" name="mark" value="{{task.id}}"> 
+                                    {% endif %}
+                                </td>
+                                <td colspan="4" style="min-width: 100px;"> {{ task.name }} </td>
+                                <td colspan="4" style="min-width: 200px;"> {{ task.description }} </td>
+                                <td class="fw-light" id="status"> 
+                                    {% if task.completed %}
+                                    Completed
+                                    {% else %} 
+                                    Pending
+                                    {% endif %}
+                                </td>
+                                <td style="min-width: 100px;"> {{ task.created }} </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-center mt-3"> 
+                <input id="mark-button" class="btn btn-primary" type="submit" value="Mark Complete">
+            </div>
+        </form>
+    {% endif %}
+
+    <script>
+        let selected = 0;
+        var complete_button = document.querySelector('#mark-button');
+        complete_button.disabled = true;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll("#status").forEach(s => {
+                if (s.innerHTML.trim() === "Completed") {
+                    s.style.background = "mediumseagreen";
+                    s.style.color = "white";
+                } else {
+                    s.style.background = "indianred";
+                    s.style.color = "white";
+                }
+            });
+
+            document.querySelectorAll("#selected-task").forEach(task => {
+                task.addEventListener('change', () => {
+                    if (task.checked){
+                        selected++;
+                    } else {
+                        selected--;
+                    }
+
+                    if (selected > 0){
+                        complete_button.disabled = false;
+                    } else {
+                        complete_button.disabled = true;
+                    }
+                })
+            })
+        })
+
+
+
+    </script>
+{% endblock %}

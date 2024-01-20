@@ -1,0 +1,24 @@
+{% extends "tasks/layout.html" %}
+
+{% block body %}
+<h4 class="mt-5"> Add New Task </h4>
+<form action="{% url 'add' %}" method="post">
+    {% csrf_token %}
+    <!--{{ form.as_p }}-->
+    <label class="mt-3 text-uppercase fw-bold" for="{{ form.name.id_for_label }}">Task Name</label>
+    <br>
+    {{ form.name }}
+    <br>
+    <label class="mt-3 text-uppercase fw-bold" for="{{ form.description.id_for_label }}">Task Description</label>
+    <br>
+    {{ form.description }}
+    <br>
+    <div class="d-flex mt-5">
+        <input class="btn btn-primary" type="submit" value="Create Task">
+        <div class="ps-3">
+            <a class="btn btn-danger" href="{% url 'index' %}">Cancel</a>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
